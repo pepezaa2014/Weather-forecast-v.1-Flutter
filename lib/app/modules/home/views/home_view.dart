@@ -111,23 +111,26 @@ class HomeView extends GetView<HomeController> {
   }
 
   _body() {
-    return Obx(() {
-      return Center(
-        child: Column(
-          children: [
-            TitleText(text: 'testtext'),
-            TempText(text: 16.toString()),
-            StatusText(text: 'Clearly'),
-            LatLonText(text: '86, 86'),
-            MainContainer(),
-            Expanded(
-              child: PrimaryButton(
-                onPressed: controller.test,
+    return Obx(
+      () {
+        final weather = controller.weather.value;
+        return Center(
+          child: Column(
+            children: [
+              TitleText(text: 'testtext'),
+              TempText(text: 16.toString()),
+              StatusText(text: 'Clearly'),
+              LatLonText(text: '86, 86'),
+              MainContainer(),
+              Expanded(
+                child: PrimaryButton(
+                  onPressed: controller.test,
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        );
+      },
+    );
   }
 }

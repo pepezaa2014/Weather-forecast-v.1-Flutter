@@ -13,16 +13,14 @@ class HomeController extends GetxController {
   final TextEditingController searchTextController3 = TextEditingController();
 
   double temp = 0;
-  String appid = '0eafb021692ca4ef0023a949b154692d';
 
-  final RxList<Weather> weather = RxList();
+  final Rxn<Weather> weather = Rxn();
   late final double lat;
   late final double lon;
   late final String city;
   final RxString searchTextCity = ''.obs;
   final RxString searchTextLat = ''.obs;
   final RxString searchTextLon = ''.obs;
-  String location = '';
 
   final isLoadingGetWeather = false.obs;
 
@@ -50,11 +48,6 @@ class HomeController extends GetxController {
   void onReady() {
     super.onReady();
     _determinePosition();
-    if (searchTextCity != '') {
-      _getWeatherCity();
-    } else if (searchTextLat != '' && searchTextLon != '') {
-      _getWeatherLatLon();
-    }
   }
 
   @override
@@ -63,9 +56,7 @@ class HomeController extends GetxController {
   }
 
   @override
-  void test() {
-    print(location);
-  }
+  void test() {}
 
   @override
   void changeTemp() {
@@ -75,7 +66,9 @@ class HomeController extends GetxController {
   void _getWeatherCity() async {
     try {
       isLoadingGetWeather(true);
-      final result = await _userAPI.getWeather();
+      final result = await _userAPI.getWeatherCity(
+        city: searchTextCity.value,
+      );
       isLoadingGetWeather(false);
       weather.value = result;
     } catch (error) {
@@ -84,19 +77,27 @@ class HomeController extends GetxController {
     }
   }
 
-  void _getWeatherLatLon() async {
-    try {
-      isLoadingGetWeather(true);
-      final result = await _userAPI.getWeather();
-      isLoadingGetWeather(false);
-      weather.value = result;
-    } catch (error) {
-      isLoadingGetWeather(false);
-      print((error as AppError).message);
+  void _getWeatherLatLon({
+    double? lat,
+    double? lon,
+  }) async {
+    if (lat != null && lon != null) {
+      try {
+        isLoadingGetWeather(true);
+        final result = await _userAPI.getWeatherLatLon(
+          lat: lat,
+          lon: lon,
+        );
+        isLoadingGetWeather(false);
+        weather.value = result;
+      } catch (error) {
+        isLoadingGetWeather(false);
+        print((error as AppError).message);
+      }
     }
   }
 
-  Future<Position> _determinePosition() async {
+  void _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -115,7 +116,10 @@ class HomeController extends GetxController {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    location = Geolocator.getCurrentPosition().toString();
-    return await Geolocator.getCurrentPosition();
+    final location = await Geolocator.getCurrentPosition();
+    _getWeatherLatLon(
+      lat: location.latitude,
+      lon: location.longitude,
+    );
   }
 }
