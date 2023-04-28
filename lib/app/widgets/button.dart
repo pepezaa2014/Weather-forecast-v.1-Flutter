@@ -3,35 +3,65 @@ import 'package:flutter/widgets.dart';
 import 'package:weather_pepe/app/constant/colors.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final Function() onPressed;
-
   const PrimaryButton({
-    super.key,
     required this.onPressed,
   });
 
+  final Function() onPressed;
+
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.all(8),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Container(
+        width: 150,
+        height: 50,
         child: ElevatedButton(
           onPressed: onPressed,
-          child: const Icon(Icons.add), //
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              const CircleBorder(),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.amber,
+            minimumSize: const Size.fromHeight(80),
+          ),
+          child: const Text(
+            'Current Location',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.all(20),
-            ),
-            backgroundColor: MaterialStateProperty.all(WidgetColor.mainButton),
-            overlayColor: MaterialStateProperty.resolveWith<Color?>(
-              (states) {
-                if (states.contains(MaterialState.pressed))
-                  return WidgetColor.mainButtonAfter;
-              },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondaryButton extends StatelessWidget {
+  const SecondaryButton({
+    required this.onPressed,
+  });
+
+  final Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Container(
+        width: 150,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            primary: Colors.amber,
+            minimumSize: const Size.fromHeight(80),
+          ),
+          child: const Text(
+            'Enter',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

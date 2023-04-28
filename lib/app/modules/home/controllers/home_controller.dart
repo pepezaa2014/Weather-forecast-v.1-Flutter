@@ -5,14 +5,13 @@ import 'package:weather_pepe/app/core/api/weather_api.dart';
 import 'package:weather_pepe/app/data/models/app_error_model.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/extensions/bool_extension.dart';
+import 'package:intl/intl.dart';
 
 class HomeController extends GetxController {
   final WeatherAPI _userAPI = Get.find();
   final TextEditingController searchTextController1 = TextEditingController();
   final TextEditingController searchTextController2 = TextEditingController();
   final TextEditingController searchTextController3 = TextEditingController();
-
-  double temp = 0;
 
   final Rxn<Weather> weather = Rxn();
   late final double lat;
@@ -55,19 +54,36 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  @override
-  void test() {}
-
-  @override
-  void changeTemp() {
-    temp = temp - 273.15;
+  String convertUnix(String unix) {
+    int intUnix = int.parse(unix);
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(intUnix * 1000);
+    String formattedTime = DateFormat.yMMMMd().add_jms().format(dateTime);
+    return formattedTime;
   }
 
-  void _getWeatherCity() async {
+  void getcity() {
+    _getWeatherCity(searchTextCity.value);
+  }
+
+  void getcurrentlocation() {
+    _determinePosition();
+  }
+
+  void getLatLon() {
+    _getWeatherLatLon(
+        lat: double.parse(searchTextLat.value),
+        lon: double.parse(searchTextLon.value));
+  }
+
+  double changeTemp(double? temp) {
+    return temp = temp! - 273.15;
+  }
+
+  void _getWeatherCity(String city) async {
     try {
       isLoadingGetWeather(true);
       final result = await _userAPI.getWeatherCity(
-        city: searchTextCity.value,
+        city: city,
       );
       isLoadingGetWeather(false);
       weather.value = result;

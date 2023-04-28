@@ -1,8 +1,14 @@
 part of 'resources.dart';
 
-class Images {
-  Images._();
+class ImageName {
+  ImageName._();
 
+  static const String barometer = 'assets/images/barometer.png';
+  static const String day = 'assets/images/day.png';
+  static const String humidity = 'assets/images/humidity.png';
+  static const String night = 'assets/images/night.png';
+  static const String sunrise = 'assets/images/sunrise.png';
+  static const String sunset = 'assets/images/sunset.png';
   static const String weather01d = 'assets/images/weather_01d.png';
   static const String weather01n = 'assets/images/weather_01n.png';
   static const String weather02d = 'assets/images/weather_02d.png';
@@ -21,4 +27,5 @@ class Images {
   static const String weather13n = 'assets/images/weather_13n.png';
   static const String weather50d = 'assets/images/weather_50d.png';
   static const String weather50n = 'assets/images/weather_50n.png';
+  static const String wind = 'assets/images/wind.png';
 }
