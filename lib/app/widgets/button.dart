@@ -50,6 +50,9 @@ class SecondaryButton extends StatelessWidget {
       child: Container(
         width: 150,
         height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(

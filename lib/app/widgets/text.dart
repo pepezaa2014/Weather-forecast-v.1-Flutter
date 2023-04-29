@@ -2,6 +2,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_pepe/app/constant/colors.dart';
 
+class SearchText extends StatelessWidget {
+  const SearchText({
+    super.key,
+    required this.text,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
 class AppbarText extends StatelessWidget {
   const AppbarText({
     super.key,
@@ -351,25 +375,67 @@ class StatusTextDay extends StatelessWidget {
   const StatusTextDay({
     super.key,
     required this.text,
+    // required this.img,
   });
 
   final String text;
+  // final String img;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: WidgetColor.secondaryText,
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Padding(
+            //   padding: const EdgeInsets.only(right: 8),
+            //   child: Image.asset(
+            //     img,
+            //     width: 20,
+            //     height: 20,
+            //     color: Colors.white,
+            //   ),
+            // ),
+            Text(
+              text,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: WidgetColor.mainText,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+// child: Center(
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Padding(
+//               padding: const EdgeInsets.only(right: 8),
+//               child: Image.asset(
+//                 img,
+//                 width: 20,
+//                 height: 20,
+//                 color: Colors.white,
+//               ),
+//             ),
+//             Text(
+//               text,
+//               style: const TextStyle(
+//                 fontSize: 16,
+//                 fontWeight: FontWeight.bold,
+//                 color: WidgetColor.mainText,
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
 
 class StatusTextNight extends StatelessWidget {
   const StatusTextNight({

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:weather_pepe/app/constant/colors.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
 import 'package:weather_pepe/resources/resources.dart';
 
@@ -158,6 +159,7 @@ class onTheTopDay extends StatelessWidget {
     required this.status,
     required this.lat,
     required this.lon,
+    // required this.img,
   });
 
   final String title;
@@ -168,6 +170,7 @@ class onTheTopDay extends StatelessWidget {
   final String status;
   final String lat;
   final String lon;
+  // final String img;
 
   @override
   Widget build(BuildContext context) {
@@ -188,6 +191,7 @@ class onTheTopDay extends StatelessWidget {
             low: low,
           ),
           StatusTextDay(
+            // img: img,
             text: status,
           ),
           LatLonTextDay(
@@ -247,6 +251,27 @@ class onTheTopNight extends StatelessWidget {
             lon: lon,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class FindLocation extends StatelessWidget {
+  FindLocation({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(),
+          ),
+        ),
       ),
     );
   }

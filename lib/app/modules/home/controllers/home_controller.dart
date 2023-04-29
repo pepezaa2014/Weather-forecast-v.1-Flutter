@@ -6,20 +6,12 @@ import 'package:weather_pepe/app/data/models/app_error_model.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/extensions/bool_extension.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_pepe/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
   final WeatherAPI _userAPI = Get.find();
-  final TextEditingController searchTextController1 = TextEditingController();
-  final TextEditingController searchTextController2 = TextEditingController();
-  final TextEditingController searchTextController3 = TextEditingController();
 
   final Rxn<Weather> weather = Rxn();
-  late final double lat;
-  late final double lon;
-  late final String city;
-  final RxString searchTextCity = ''.obs;
-  final RxString searchTextLat = ''.obs;
-  final RxString searchTextLon = ''.obs;
 
   final isLoadingGetWeather = false.obs;
 
@@ -32,15 +24,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    searchTextController1.addListener(() {
-      searchTextCity.value = searchTextController1.text;
-    });
-    searchTextController2.addListener(() {
-      searchTextLat.value = searchTextController2.text;
-    });
-    searchTextController3.addListener(() {
-      searchTextLon.value = searchTextController3.text;
-    });
   }
 
   @override
@@ -61,55 +44,35 @@ class HomeController extends GetxController {
     return formattedTime;
   }
 
-  void getcity() {
-    _getWeatherCity(searchTextCity.value);
+  void goNext() async {
+    final result = await Get.toNamed(Routes.FIND_LOCATION);
+    weather.value = result;
+    print(weather.value);
   }
 
   void getcurrentlocation() {
     _determinePosition();
   }
 
-  void getLatLon() {
-    _getWeatherLatLon(
-        lat: double.parse(searchTextLat.value),
-        lon: double.parse(searchTextLon.value));
-  }
-
   double changeTemp(double? temp) {
     return temp = temp! - 273.15;
   }
 
-  void _getWeatherCity(String city) async {
+  void _getWeatherLatLon({
+    required double lat,
+    required double lon,
+  }) async {
     try {
       isLoadingGetWeather(true);
-      final result = await _userAPI.getWeatherCity(
-        city: city,
+      final result = await _userAPI.getWeatherLatLon(
+        lat: lat,
+        lon: lon,
       );
       isLoadingGetWeather(false);
       weather.value = result;
     } catch (error) {
       isLoadingGetWeather(false);
       print((error as AppError).message);
-    }
-  }
-
-  void _getWeatherLatLon({
-    double? lat,
-    double? lon,
-  }) async {
-    if (lat != null && lon != null) {
-      try {
-        isLoadingGetWeather(true);
-        final result = await _userAPI.getWeatherLatLon(
-          lat: lat,
-          lon: lon,
-        );
-        isLoadingGetWeather(false);
-        weather.value = result;
-      } catch (error) {
-        isLoadingGetWeather(false);
-        print((error as AppError).message);
-      }
     }
   }
 
