@@ -48,8 +48,10 @@ class HomeView extends GetView<HomeController> {
     return Obx(
       () {
         final weathers = controller.weather.value;
-        // final Weather weatherIcon;
+
         final themeApp = weathers?.weather?.firstWhereOrNull((e) => true);
+        final iconCode = themeApp?.weatherIcon;
+        final iconName = iconCode?.imageName ?? '';
 
         return Container(
           decoration: BoxDecoration(
@@ -79,6 +81,7 @@ class HomeView extends GetView<HomeController> {
                             low: controller
                                 .changeTemp(weathers?.main?.tempMin)
                                 .toStringAsFixed(1),
+                            img: iconName.toString(),
                             status: themeApp.description.toString(),
                             lat: weathers?.coord?.lat?.toString() ?? '',
                             lon: weathers?.coord?.lon?.toString() ?? '',
@@ -105,6 +108,7 @@ class HomeView extends GetView<HomeController> {
                             low: controller
                                 .changeTemp(weathers?.main?.tempMin)
                                 .toStringAsFixed(1),
+                            img: iconName.toString(),
                             status: themeApp.description.toString(),
                             lat: weathers?.coord?.lat?.toString() ?? '',
                             lon: weathers?.coord?.lon?.toString() ?? '',

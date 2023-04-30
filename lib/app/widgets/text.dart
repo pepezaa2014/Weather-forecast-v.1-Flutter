@@ -375,11 +375,11 @@ class StatusTextDay extends StatelessWidget {
   const StatusTextDay({
     super.key,
     required this.text,
-    // required this.img,
+    required this.img,
   });
 
   final String text;
-  // final String img;
+  final String img;
 
   @override
   Widget build(BuildContext context) {
@@ -389,15 +389,14 @@ class StatusTextDay extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(right: 8),
-            //   child: Image.asset(
-            //     img,
-            //     width: 20,
-            //     height: 20,
-            //     color: Colors.white,
-            //   ),
-            // ),
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Image.asset(
+                img,
+                width: 20,
+                height: 20,
+              ),
+            ),
             Text(
               text,
               style: const TextStyle(
@@ -412,49 +411,42 @@ class StatusTextDay extends StatelessWidget {
     );
   }
 }
-// child: Center(
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.only(right: 8),
-//               child: Image.asset(
-//                 img,
-//                 width: 20,
-//                 height: 20,
-//                 color: Colors.white,
-//               ),
-//             ),
-//             Text(
-//               text,
-//               style: const TextStyle(
-//                 fontSize: 16,
-//                 fontWeight: FontWeight.bold,
-//                 color: WidgetColor.mainText,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
 
 class StatusTextNight extends StatelessWidget {
   const StatusTextNight({
     super.key,
     required this.text,
+    required this.img,
   });
 
   final String text;
+  final String img;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: WidgetColor.secondaryText,
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Image.asset(
+                img,
+                width: 40,
+                height: 40,
+              ),
+            ),
+            Text(
+              text,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: WidgetColor.mainText,
+              ),
+            ),
+          ],
         ),
       ),
     );

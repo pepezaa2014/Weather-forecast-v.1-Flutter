@@ -165,7 +165,7 @@ class onTheTopDay extends StatelessWidget {
     required this.humidity,
     required this.windDeg,
     required this.windSpeed,
-    // required this.img,
+    required this.img,
   });
 
   final String title;
@@ -182,7 +182,7 @@ class onTheTopDay extends StatelessWidget {
   final String humidity;
   final String windDeg;
   final String windSpeed;
-  // final String img;
+  final String img;
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +203,7 @@ class onTheTopDay extends StatelessWidget {
             low: low,
           ),
           StatusTextDay(
-            // img: img,
+            img: img,
             text: status,
           ),
           LatLonTextDay(
@@ -240,6 +240,7 @@ class onTheTopNight extends StatelessWidget {
     required this.humidity,
     required this.windDeg,
     required this.windSpeed,
+    required this.img,
   });
 
   final String title;
@@ -256,6 +257,7 @@ class onTheTopNight extends StatelessWidget {
   final String humidity;
   final String windDeg;
   final String windSpeed;
+  final String img;
 
   @override
   Widget build(BuildContext context) {
@@ -276,6 +278,7 @@ class onTheTopNight extends StatelessWidget {
             low: low,
           ),
           StatusTextNight(
+            img: img,
             text: status,
           ),
           LatLonTextNight(
