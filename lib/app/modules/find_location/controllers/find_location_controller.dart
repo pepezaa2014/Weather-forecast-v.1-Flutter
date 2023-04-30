@@ -18,8 +18,6 @@ class FindLocationController extends GetxController {
   final RxString searchTextLat = ''.obs;
   final RxString searchTextLon = ''.obs;
 
-  final Rxn<Weather> weather = Rxn();
-
   final isLoadingGetWeather = false.obs;
 
   RxBool get isLoading {
@@ -54,14 +52,12 @@ class FindLocationController extends GetxController {
 
   void getcity() {
     _getWeatherCity(searchTextCity.value);
-    Get.back(result: weather.value);
   }
 
   void getLatLon() {
     _getWeatherLatLon(
         lat: double.parse(searchTextLat.toString()),
         lon: double.parse(searchTextLon.toString()));
-    Get.back(result: weather.value);
   }
 
   void _getWeatherCity(
@@ -73,7 +69,7 @@ class FindLocationController extends GetxController {
         city: city,
       );
       isLoadingGetWeather(false);
-      weather.value = result;
+      Get.back(result: result);
     } catch (error) {
       isLoadingGetWeather(false);
       print((error as AppError).message);
@@ -91,7 +87,7 @@ class FindLocationController extends GetxController {
         lon: lon,
       );
       isLoadingGetWeather(false);
-      weather.value = result;
+      Get.back(result: result);
     } catch (error) {
       isLoadingGetWeather(false);
       print((error as AppError).message);
