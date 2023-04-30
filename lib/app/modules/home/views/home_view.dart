@@ -15,7 +15,6 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // endDrawer: _drawer(),
       backgroundColor: WidgetColor.appBar,
       appBar: _appbar(),
       body: _body(),
@@ -28,21 +27,17 @@ class HomeView extends GetView<HomeController> {
       centerTitle: true,
       leading: Padding(
         padding: const EdgeInsets.all(8),
-        child: GestureDetector(
-          onTap: () {
-            controller.getcurrentlocation();
-          },
-          child: const Icon(Icons.location_on),
+        child: IconButton(
+          onPressed: controller.getcurrentlocation,
+          icon: const Icon(Icons.location_on),
         ),
       ),
       actions: [
         Padding(
           padding: const EdgeInsets.all(8),
-          child: GestureDetector(
-            onTap: () {
-              controller.goNext();
-            },
-            child: const Icon(Icons.search),
+          child: IconButton(
+            onPressed: controller.goNext,
+            icon: const Icon(Icons.search),
           ),
         ),
       ],
@@ -54,12 +49,13 @@ class HomeView extends GetView<HomeController> {
       () {
         final weathers = controller.weather.value;
         // final Weather weatherIcon;
+        final themeApp = weathers?.weather?.firstWhereOrNull((e) => true);
 
         return Container(
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                weathers!.weather![0].icon.toString().contains('d')
+                themeApp != null && themeApp.icon.toString().contains('d')
                     ? ImageName.day
                     : ImageName.night,
               ),
@@ -69,49 +65,63 @@ class HomeView extends GetView<HomeController> {
           child: Center(
             child: Column(
               children: [
-                weathers.weather![0].icon.toString().contains('d')
-                    ? onTheTopDay(
-                        title: weathers.name.toString(),
-                        country: weathers.sys!.country.toString(),
-                        temp: controller
-                            .changeTemp(weathers.main!.temp)
-                            .toStringAsFixed(1),
-                        high: controller
-                            .changeTemp(weathers.main!.tempMax)
-                            .toStringAsFixed(1),
-                        low: controller
-                            .changeTemp(weathers.main!.tempMin)
-                            .toStringAsFixed(1),
-                        status: weathers.weather![0].description.toString(),
-                        lat: weathers.coord!.lat.toString(),
-                        lon: weathers.coord!.lon.toString(),
-                      )
-                    : onTheTopNight(
-                        title: weathers.name.toString(),
-                        country: weathers.sys!.country.toString(),
-                        temp: controller
-                            .changeTemp(weathers.main!.temp)
-                            .toStringAsFixed(1),
-                        high: controller
-                            .changeTemp(weathers.main!.tempMax)
-                            .toStringAsFixed(1),
-                        low: controller
-                            .changeTemp(weathers.main!.tempMin)
-                            .toStringAsFixed(1),
-                        status: weathers.weather![0].description.toString(),
-                        lat: weathers.coord!.lat.toString(),
-                        lon: weathers.coord!.lon.toString(),
+                themeApp != null
+                    ? themeApp.icon.toString().contains('d')
+                        ? onTheTopDay(
+                            title: weathers?.name?.toString() ?? '',
+                            country: weathers?.sys?.country?.toString() ?? '',
+                            temp: controller
+                                .changeTemp(weathers?.main?.temp)
+                                .toStringAsFixed(1),
+                            high: controller
+                                .changeTemp(weathers?.main?.tempMax)
+                                .toStringAsFixed(1),
+                            low: controller
+                                .changeTemp(weathers?.main?.tempMin)
+                                .toStringAsFixed(1),
+                            status: themeApp.description.toString(),
+                            lat: weathers?.coord?.lat?.toString() ?? '',
+                            lon: weathers?.coord?.lon?.toString() ?? '',
+                            sunrise: controller.convertUnix(
+                                weathers?.sys?.sunrise?.toString() ?? ''),
+                            sunset: controller.convertUnix(
+                                weathers?.sys?.sunset?.toString() ?? ''),
+                            pressure:
+                                weathers?.main?.pressure?.toString() ?? '',
+                            humidity:
+                                weathers?.main?.humidity?.toString() ?? '',
+                            windDeg: weathers?.wind?.speed?.toString() ?? '',
+                            windSpeed: weathers?.wind?.deg?.toString() ?? '',
+                          )
+                        : onTheTopNight(
+                            title: weathers?.name?.toString() ?? '',
+                            country: weathers?.sys?.country?.toString() ?? '',
+                            temp: controller
+                                .changeTemp(weathers?.main?.temp)
+                                .toStringAsFixed(1),
+                            high: controller
+                                .changeTemp(weathers?.main?.tempMax)
+                                .toStringAsFixed(1),
+                            low: controller
+                                .changeTemp(weathers?.main?.tempMin)
+                                .toStringAsFixed(1),
+                            status: themeApp.description.toString(),
+                            lat: weathers?.coord?.lat?.toString() ?? '',
+                            lon: weathers?.coord?.lon?.toString() ?? '',
+                            sunrise: controller.convertUnix(
+                                weathers?.sys?.sunrise?.toString() ?? ''),
+                            sunset: controller.convertUnix(
+                                weathers?.sys?.sunset?.toString() ?? ''),
+                            pressure:
+                                weathers?.main?.pressure?.toString() ?? '',
+                            humidity:
+                                weathers?.main?.humidity?.toString() ?? '',
+                            windDeg: weathers?.wind?.speed?.toString() ?? '',
+                            windSpeed: weathers?.wind?.deg?.toString() ?? '',
+                          )
+                    : const SizedBox.shrink(
+                        child: Text(''),
                       ),
-                MainContainer(
-                  sunrise:
-                      controller.convertUnix(weathers.sys!.sunrise.toString()),
-                  sunset:
-                      controller.convertUnix(weathers.sys!.sunset.toString()),
-                  pressure: weathers.main!.pressure.toString(),
-                  humidity: weathers.main!.humidity.toString(),
-                  windDeg: weathers.wind!.speed.toString(),
-                  windSpeed: weathers.wind!.deg.toString(),
-                ),
               ],
             ),
           ),

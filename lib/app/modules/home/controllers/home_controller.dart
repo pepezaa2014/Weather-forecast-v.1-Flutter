@@ -11,7 +11,7 @@ import 'package:weather_pepe/app/routes/app_pages.dart';
 class HomeController extends GetxController {
   final WeatherAPI _userAPI = Get.find();
 
-  final Rxn<Weather> weather = Rxn();
+  late final Rxn<Weather> weather = Rxn();
 
   final isLoadingGetWeather = false.obs;
 
@@ -46,8 +46,11 @@ class HomeController extends GetxController {
 
   void goNext() async {
     final result = await Get.toNamed(Routes.FIND_LOCATION);
-    weather.value = result;
-    print(weather.value);
+    final tempWeather = result as Weather?;
+    if (tempWeather != null) {
+      weather.value = tempWeather;
+      print(weather.value);
+    }
   }
 
   void getcurrentlocation() {

@@ -150,7 +150,7 @@ class MainContainer extends StatelessWidget {
 }
 
 class onTheTopDay extends StatelessWidget {
-  onTheTopDay({
+  const onTheTopDay({
     required this.title,
     required this.country,
     required this.temp,
@@ -159,6 +159,12 @@ class onTheTopDay extends StatelessWidget {
     required this.status,
     required this.lat,
     required this.lon,
+    required this.sunrise,
+    required this.sunset,
+    required this.pressure,
+    required this.humidity,
+    required this.windDeg,
+    required this.windSpeed,
     // required this.img,
   });
 
@@ -170,6 +176,12 @@ class onTheTopDay extends StatelessWidget {
   final String status;
   final String lat;
   final String lon;
+  final String sunrise;
+  final String sunset;
+  final String pressure;
+  final String humidity;
+  final String windDeg;
+  final String windSpeed;
   // final String img;
 
   @override
@@ -198,6 +210,14 @@ class onTheTopDay extends StatelessWidget {
             lat: lat,
             lon: lon,
           ),
+          MainContainer(
+            sunrise: sunrise,
+            sunset: sunset,
+            pressure: pressure,
+            humidity: humidity,
+            windDeg: windDeg,
+            windSpeed: windSpeed,
+          ),
         ],
       ),
     );
@@ -205,7 +225,7 @@ class onTheTopDay extends StatelessWidget {
 }
 
 class onTheTopNight extends StatelessWidget {
-  onTheTopNight({
+  const onTheTopNight({
     required this.title,
     required this.country,
     required this.temp,
@@ -214,6 +234,12 @@ class onTheTopNight extends StatelessWidget {
     required this.status,
     required this.lat,
     required this.lon,
+    required this.sunrise,
+    required this.sunset,
+    required this.pressure,
+    required this.humidity,
+    required this.windDeg,
+    required this.windSpeed,
   });
 
   final String title;
@@ -224,6 +250,12 @@ class onTheTopNight extends StatelessWidget {
   final String status;
   final String lat;
   final String lon;
+  final String sunrise;
+  final String sunset;
+  final String pressure;
+  final String humidity;
+  final String windDeg;
+  final String windSpeed;
 
   @override
   Widget build(BuildContext context) {
@@ -249,6 +281,14 @@ class onTheTopNight extends StatelessWidget {
           LatLonTextNight(
             lat: lat,
             lon: lon,
+          ),
+          MainContainer(
+            sunrise: sunrise,
+            sunset: sunset,
+            pressure: pressure,
+            humidity: humidity,
+            windDeg: windDeg,
+            windSpeed: windSpeed,
           ),
         ],
       ),
