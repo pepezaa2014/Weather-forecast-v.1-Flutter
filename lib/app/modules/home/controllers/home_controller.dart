@@ -82,7 +82,6 @@ class HomeController extends GetxController {
         title: 'Error',
         message: 'Location services are disabled.',
       );
-      return Future.error('Location services are disabled.');
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -92,7 +91,6 @@ class HomeController extends GetxController {
           title: 'Error',
           message: 'Location permissions are denied',
         );
-        return Future.error('Location permissions are denied');
       }
     }
     if (permission == LocationPermission.deniedForever) {
@@ -101,8 +99,6 @@ class HomeController extends GetxController {
         message:
             'Location permissions are permanently denied, we cannot request permissions.',
       );
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
     }
     final location = await Geolocator.getCurrentPosition();
     _getWeatherLatLon(

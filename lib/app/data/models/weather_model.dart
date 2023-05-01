@@ -1,6 +1,5 @@
 import 'package:get/get_utils/get_utils.dart';
 import 'package:weather_pepe/app/constant/weather_icon.dart';
-import 'package:weather_pepe/resources/resources.dart';
 
 class Weather {
   Coord? coord;
@@ -91,8 +90,8 @@ class Coord {
   Coord({this.lon, this.lat});
 
   Coord.fromJson(Map<String, dynamic> json) {
-    lon = json['lon'];
-    lat = json['lat'];
+    lon = json['lon']?.toDouble();
+    lat = json['lat']?.toDouble();
   }
 
   Map<String, dynamic> toJson() {

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/colors.dart';
-import 'package:weather_pepe/app/data/models/weather_model.dart';
-import 'package:weather_pepe/app/constant/weather_icon.dart';
+import 'package:weather_pepe/app/constant/used_widget_color.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
 
 import 'package:weather_pepe/app/widgets/container.dart';
-
 import 'package:weather_pepe/resources/resources.dart';
 
 import '../controllers/home_controller.dart';
@@ -19,7 +16,6 @@ class HomeView extends GetView<HomeController> {
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: WidgetColor.appBar,
           appBar: _appbar(),
           body: _body(),
         ),
@@ -32,7 +28,7 @@ class HomeView extends GetView<HomeController> {
 
   _appbar() {
     return AppBar(
-      backgroundColor: WidgetColor.appBar,
+      backgroundColor: UseWidgetColor.appBar,
       centerTitle: true,
       leading: IconButton(
         onPressed: controller.getCurrentLocation,

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_pepe/app/constant/colors.dart';
+import 'package:weather_pepe/app/constant/used_widget_color.dart';
 
 class SearchText extends StatelessWidget {
   const SearchText({
@@ -41,7 +41,7 @@ class AppbarText extends StatelessWidget {
       style: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
-        color: WidgetColor.mainText,
+        color: UseWidgetColor.mainText,
       ),
     );
   }
@@ -116,7 +116,7 @@ class MainInformation extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );
@@ -155,7 +155,7 @@ class HeadInformation extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: WidgetColor.mainText,
+                color: UseWidgetColor.mainText,
               ),
             ),
           ],
@@ -184,7 +184,7 @@ class DetailsInformation extends StatelessWidget {
         text + ' ' + unit,
         style: const TextStyle(
           fontSize: 16,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );
@@ -208,7 +208,7 @@ class DateTime extends StatelessWidget {
         text,
         style: const TextStyle(
           fontSize: 16,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );
@@ -260,7 +260,7 @@ class CountryNight extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );
@@ -312,7 +312,7 @@ class TempTextNight extends StatelessWidget {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );
@@ -364,7 +364,7 @@ class HighLowTempTextNight extends StatelessWidget {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );
@@ -402,7 +402,7 @@ class StatusTextDay extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: WidgetColor.mainText,
+                color: UseWidgetColor.mainText,
               ),
             ),
           ],
@@ -443,7 +443,7 @@ class StatusTextNight extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: WidgetColor.mainText,
+                color: UseWidgetColor.mainText,
               ),
             ),
           ],
@@ -498,7 +498,7 @@ class LatLonTextNight extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );
@@ -522,7 +522,7 @@ class SearchLatLonText extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: WidgetColor.mainText,
+          color: UseWidgetColor.mainText,
         ),
       ),
     );

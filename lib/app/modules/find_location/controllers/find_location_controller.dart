@@ -9,9 +9,10 @@ import 'package:weather_pepe/app/utils/show_alert.dart';
 class FindLocationController extends GetxController {
   final WeatherAPI _weatherAPI = Get.find();
 
-  final TextEditingController searchTextController1 = TextEditingController();
-  final TextEditingController searchTextController2 = TextEditingController();
-  final TextEditingController searchTextController3 = TextEditingController();
+  final TextEditingController searchTextControllerCity =
+      TextEditingController();
+  final TextEditingController searchTextControllerLat = TextEditingController();
+  final TextEditingController searchTextControllerLon = TextEditingController();
 
   final RxString searchTextCity = ''.obs;
   final RxString searchTextLat = ''.obs;
@@ -20,7 +21,9 @@ class FindLocationController extends GetxController {
   final isLoadingGetWeatherLatLon = false.obs;
   final isLoadingGetWeatherCity = false.obs;
 
-  FocusNode focusNode = FocusNode();
+  FocusNode focusNodeCity = FocusNode();
+  FocusNode focusNodeLat = FocusNode();
+  FocusNode focusNodeLon = FocusNode();
 
   RxBool get isLoadingLatLon {
     return [
@@ -34,17 +37,24 @@ class FindLocationController extends GetxController {
     ].atLeastOneTrue.obs;
   }
 
+  RxBool get isLoading {
+    return [
+      isLoadingGetWeatherCity.value,
+      isLoadingGetWeatherLatLon.value,
+    ].atLeastOneTrue.obs;
+  }
+
   @override
   void onInit() {
     super.onInit();
-    searchTextController1.addListener(() {
-      searchTextCity.value = searchTextController1.text;
+    searchTextControllerCity.addListener(() {
+      searchTextCity.value = searchTextControllerCity.text;
     });
-    searchTextController2.addListener(() {
-      searchTextLat.value = searchTextController2.text;
+    searchTextControllerLat.addListener(() {
+      searchTextLat.value = searchTextControllerLat.text;
     });
-    searchTextController3.addListener(() {
-      searchTextLon.value = searchTextController3.text;
+    searchTextControllerLon.addListener(() {
+      searchTextLon.value = searchTextControllerLon.text;
     });
   }
 
@@ -59,7 +69,7 @@ class FindLocationController extends GetxController {
   }
 
   void getCity() {
-    if (searchTextCity != '') {
+    if (searchTextCity.isNotEmpty) {
       _getWeatherCity(searchTextCity.value);
     } else {
       showAlert(title: 'Error', message: 'Please fill the text field.');
@@ -67,18 +77,32 @@ class FindLocationController extends GetxController {
   }
 
   void getLatLon() {
-    if (searchTextLat != '' && searchTextLon != '') {
+    if (searchTextLat.isNotEmpty && searchTextLon.isNotEmpty) {
       _getWeatherLatLon(
-        lat: double.parse(searchTextLat.toString()),
-        lon: double.parse(searchTextLon.toString()),
+        lat: double.tryParse(searchTextLat.toString()),
+        lon: double.tryParse(searchTextLon.toString()),
       );
     } else {
       showAlert(title: 'Error', message: 'Please fill the text field.');
     }
   }
 
-  void unFocus() {
-    focusNode.unfocus();
+  void unFocusCity() {
+    focusNodeCity.unfocus();
+  }
+
+  void unFocusLat() {
+    focusNodeLat.unfocus();
+  }
+
+  void unFocusLon() {
+    focusNodeLon.unfocus();
+  }
+
+  void unFocusMain() {
+    focusNodeLon.unfocus();
+    focusNodeLat.unfocus();
+    focusNodeCity.unfocus();
   }
 
   void _getWeatherCity(
@@ -86,7 +110,7 @@ class FindLocationController extends GetxController {
   ) async {
     try {
       isLoadingGetWeatherCity(true);
-      unFocus();
+      unFocusCity();
       final result = await _weatherAPI.getWeatherCity(
         city: city,
       );
@@ -102,18 +126,20 @@ class FindLocationController extends GetxController {
   }
 
   void _getWeatherLatLon({
-    required double lat,
-    required double lon,
+    required double? lat,
+    required double? lon,
   }) async {
     try {
       isLoadingGetWeatherLatLon(true);
-      unFocus();
-      final result = await _weatherAPI.getWeatherLatLon(
-        lat: lat,
-        lon: lon,
-      );
-      isLoadingGetWeatherLatLon(false);
-      Get.back(result: result);
+      unFocusCity();
+      if (lat != null && lon != null) {
+        final result = await _weatherAPI.getWeatherLatLon(
+          lat: lat,
+          lon: lon,
+        );
+        isLoadingGetWeatherLatLon(false);
+        Get.back(result: result);
+      }
     } catch (error) {
       isLoadingGetWeatherLatLon(false);
       showAlert(
