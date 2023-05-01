@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_pepe/app/constant/colors.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
+import 'package:weather_pepe/app/constant/weather_icon.dart';
+import 'package:weather_pepe/app/utils/loading_indicator.dart';
 
 import 'package:weather_pepe/app/widgets/container.dart';
 
@@ -14,31 +16,32 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: WidgetColor.appBar,
-      appBar: _appbar(),
-      body: _body(),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: WidgetColor.appBar,
+          appBar: _appbar(),
+          body: _body(),
+        ),
+        Obx(
+          () => loadingIndicator(controller.isLoading.value),
+        ),
+      ],
     );
   }
 
   _appbar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: WidgetColor.appBar,
       centerTitle: true,
-      leading: Padding(
-        padding: const EdgeInsets.all(8),
-        child: IconButton(
-          onPressed: controller.getcurrentlocation,
-          icon: const Icon(Icons.location_on),
-        ),
+      leading: IconButton(
+        onPressed: controller.getCurrentLocation,
+        icon: const Icon(Icons.location_on),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: IconButton(
-            onPressed: controller.goNext,
-            icon: const Icon(Icons.search),
-          ),
+        IconButton(
+          onPressed: controller.goNext,
+          icon: const Icon(Icons.search),
         ),
       ],
     );
@@ -50,8 +53,6 @@ class HomeView extends GetView<HomeController> {
         final weathers = controller.weather.value;
 
         final themeApp = weathers?.weather?.firstWhereOrNull((e) => true);
-        final iconCode = themeApp?.weatherIcon;
-        final iconName = iconCode?.imageName ?? '';
 
         return Container(
           decoration: BoxDecoration(
@@ -69,63 +70,13 @@ class HomeView extends GetView<HomeController> {
               children: [
                 themeApp != null
                     ? themeApp.icon.toString().contains('d')
-                        ? onTheTopDay(
-                            title: weathers?.name?.toString() ?? '',
-                            country: weathers?.sys?.country?.toString() ?? '',
-                            temp: controller
-                                .changeTemp(weathers?.main?.temp)
-                                .toStringAsFixed(1),
-                            high: controller
-                                .changeTemp(weathers?.main?.tempMax)
-                                .toStringAsFixed(1),
-                            low: controller
-                                .changeTemp(weathers?.main?.tempMin)
-                                .toStringAsFixed(1),
-                            img: iconName.toString(),
-                            status: themeApp.description.toString(),
-                            lat: weathers?.coord?.lat?.toString() ?? '',
-                            lon: weathers?.coord?.lon?.toString() ?? '',
-                            sunrise: controller.convertUnix(
-                                weathers?.sys?.sunrise?.toString() ?? ''),
-                            sunset: controller.convertUnix(
-                                weathers?.sys?.sunset?.toString() ?? ''),
-                            pressure:
-                                weathers?.main?.pressure?.toString() ?? '',
-                            humidity:
-                                weathers?.main?.humidity?.toString() ?? '',
-                            windDeg: weathers?.wind?.speed?.toString() ?? '',
-                            windSpeed: weathers?.wind?.deg?.toString() ?? '',
+                        ? OnTheTopDay(
+                            itemWeather: weathers,
                           )
-                        : onTheTopNight(
-                            title: weathers?.name?.toString() ?? '',
-                            country: weathers?.sys?.country?.toString() ?? '',
-                            temp: controller
-                                .changeTemp(weathers?.main?.temp)
-                                .toStringAsFixed(1),
-                            high: controller
-                                .changeTemp(weathers?.main?.tempMax)
-                                .toStringAsFixed(1),
-                            low: controller
-                                .changeTemp(weathers?.main?.tempMin)
-                                .toStringAsFixed(1),
-                            img: iconName.toString(),
-                            status: themeApp.description.toString(),
-                            lat: weathers?.coord?.lat?.toString() ?? '',
-                            lon: weathers?.coord?.lon?.toString() ?? '',
-                            sunrise: controller.convertUnix(
-                                weathers?.sys?.sunrise?.toString() ?? ''),
-                            sunset: controller.convertUnix(
-                                weathers?.sys?.sunset?.toString() ?? ''),
-                            pressure:
-                                weathers?.main?.pressure?.toString() ?? '',
-                            humidity:
-                                weathers?.main?.humidity?.toString() ?? '',
-                            windDeg: weathers?.wind?.speed?.toString() ?? '',
-                            windSpeed: weathers?.wind?.deg?.toString() ?? '',
+                        : OnTheTopNight(
+                            itemWeather: weathers,
                           )
-                    : const SizedBox.shrink(
-                        child: Text(''),
-                      ),
+                    : const SizedBox.shrink(),
               ],
             ),
           ),

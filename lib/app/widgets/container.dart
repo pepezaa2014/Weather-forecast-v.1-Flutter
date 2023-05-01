@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:get/get.dart';
 import 'package:weather_pepe/app/constant/colors.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:weather_pepe/app/constant/converter.dart';
+import 'package:weather_pepe/app/constant/weather_icon.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
 import 'package:weather_pepe/resources/resources.dart';
@@ -13,6 +15,7 @@ class MainContainer extends StatelessWidget {
     required this.pressure,
     required this.windSpeed,
     required this.windDeg,
+    required this.windGust,
     required this.sunrise,
     required this.sunset,
   });
@@ -21,6 +24,7 @@ class MainContainer extends StatelessWidget {
   final String humidity;
   final String windSpeed;
   final String windDeg;
+  final String windGust;
   final String sunrise;
   final String sunset;
 
@@ -140,6 +144,14 @@ class MainContainer extends StatelessWidget {
                     )
                   ],
                 ),
+                const HeadInformation(
+                  img: ImageName.wind,
+                  text: 'Wind Gust',
+                ),
+                DetailsInformation(
+                  text: windDeg,
+                  unit: 'm/s',
+                ),
               ],
             ),
           ),
@@ -149,40 +161,13 @@ class MainContainer extends StatelessWidget {
   }
 }
 
-class onTheTopDay extends StatelessWidget {
-  const onTheTopDay({
-    required this.title,
-    required this.country,
-    required this.temp,
-    required this.high,
-    required this.low,
-    required this.status,
-    required this.lat,
-    required this.lon,
-    required this.sunrise,
-    required this.sunset,
-    required this.pressure,
-    required this.humidity,
-    required this.windDeg,
-    required this.windSpeed,
-    required this.img,
+class OnTheTopDay extends StatelessWidget {
+  const OnTheTopDay({
+    super.key,
+    required this.itemWeather,
   });
 
-  final String title;
-  final String country;
-  final String temp;
-  final String high;
-  final String low;
-  final String status;
-  final String lat;
-  final String lon;
-  final String sunrise;
-  final String sunset;
-  final String pressure;
-  final String humidity;
-  final String windDeg;
-  final String windSpeed;
-  final String img;
+  final Weather? itemWeather;
 
   @override
   Widget build(BuildContext context) {
@@ -190,33 +175,51 @@ class onTheTopDay extends StatelessWidget {
       child: Column(
         children: [
           TitleTextDay(
-            text: title,
+            text: itemWeather?.name?.toString() ?? '',
           ),
           CountryDay(
-            text: country,
+            text: itemWeather?.sys?.country?.toString() ?? '',
           ),
           TempTextDay(
-            text: temp,
+            text: Converter.changeTemp(itemWeather?.main?.temp)
+                    ?.toStringAsFixed(2) ??
+                '',
           ),
           HighLowTempTextDay(
-            high: high,
-            low: low,
+            high: Converter.changeTemp(itemWeather?.main?.tempMax)
+                    ?.toStringAsFixed(2) ??
+                '',
+            low: Converter.changeTemp(itemWeather?.main?.tempMin)
+                    ?.toStringAsFixed(2) ??
+                '',
           ),
           StatusTextDay(
-            img: img,
-            text: status,
+            img: itemWeather?.weather
+                    ?.firstWhereOrNull((element) => true)
+                    ?.weatherIcon
+                    ?.imageName
+                    .toString() ??
+                '',
+            text: itemWeather?.weather
+                    ?.firstWhereOrNull((element) => true)
+                    ?.description
+                    ?.toString() ??
+                '',
           ),
           LatLonTextDay(
-            lat: lat,
-            lon: lon,
+            lat: itemWeather?.coord?.lat?.toString() ?? '',
+            lon: itemWeather?.coord?.lon?.toString() ?? '',
           ),
           MainContainer(
-            sunrise: sunrise,
-            sunset: sunset,
-            pressure: pressure,
-            humidity: humidity,
-            windDeg: windDeg,
-            windSpeed: windSpeed,
+            sunrise: Converter.convertUnix(
+                itemWeather?.sys?.sunrise?.toString() ?? ''),
+            sunset: Converter.convertUnix(
+                itemWeather?.sys?.sunset?.toString() ?? ''),
+            pressure: itemWeather?.main?.pressure?.toString() ?? '',
+            humidity: itemWeather?.main?.humidity?.toString() ?? '',
+            windDeg: itemWeather?.wind?.deg?.toString() ?? '',
+            windSpeed: itemWeather?.wind?.speed?.toString() ?? '',
+            windGust: itemWeather?.wind?.gust?.toString() ?? '',
           ),
         ],
       ),
@@ -224,40 +227,13 @@ class onTheTopDay extends StatelessWidget {
   }
 }
 
-class onTheTopNight extends StatelessWidget {
-  const onTheTopNight({
-    required this.title,
-    required this.country,
-    required this.temp,
-    required this.high,
-    required this.low,
-    required this.status,
-    required this.lat,
-    required this.lon,
-    required this.sunrise,
-    required this.sunset,
-    required this.pressure,
-    required this.humidity,
-    required this.windDeg,
-    required this.windSpeed,
-    required this.img,
+class OnTheTopNight extends StatelessWidget {
+  const OnTheTopNight({
+    super.key,
+    required this.itemWeather,
   });
 
-  final String title;
-  final String country;
-  final String temp;
-  final String high;
-  final String low;
-  final String status;
-  final String lat;
-  final String lon;
-  final String sunrise;
-  final String sunset;
-  final String pressure;
-  final String humidity;
-  final String windDeg;
-  final String windSpeed;
-  final String img;
+  final Weather? itemWeather;
 
   @override
   Widget build(BuildContext context) {
@@ -265,56 +241,53 @@ class onTheTopNight extends StatelessWidget {
       child: Column(
         children: [
           TitleTextNight(
-            text: title,
+            text: itemWeather?.name?.toString() ?? '',
           ),
           CountryNight(
-            text: country,
+            text: itemWeather?.sys?.country?.toString() ?? '',
           ),
           TempTextNight(
-            text: temp,
+            text: Converter.changeTemp(itemWeather?.main?.temp)
+                    ?.toStringAsFixed(2) ??
+                '',
           ),
           HighLowTempTextNight(
-            high: high,
-            low: low,
+            high: Converter.changeTemp(itemWeather?.main?.tempMax)
+                    ?.toStringAsFixed(2) ??
+                '',
+            low: Converter.changeTemp(itemWeather?.main?.tempMin)
+                    ?.toStringAsFixed(2) ??
+                '',
           ),
           StatusTextNight(
-            img: img,
-            text: status,
+            img: itemWeather?.weather
+                    ?.firstWhereOrNull((element) => true)
+                    ?.weatherIcon
+                    ?.imageName
+                    .toString() ??
+                '',
+            text: itemWeather?.weather
+                    ?.firstWhereOrNull((element) => true)
+                    ?.description
+                    ?.toString() ??
+                '',
           ),
           LatLonTextNight(
-            lat: lat,
-            lon: lon,
+            lat: itemWeather?.coord?.lat?.toString() ?? '',
+            lon: itemWeather?.coord?.lon?.toString() ?? '',
           ),
           MainContainer(
-            sunrise: sunrise,
-            sunset: sunset,
-            pressure: pressure,
-            humidity: humidity,
-            windDeg: windDeg,
-            windSpeed: windSpeed,
+            sunrise: Converter.convertUnix(
+                itemWeather?.sys?.sunrise?.toString() ?? ''),
+            sunset: Converter.convertUnix(
+                itemWeather?.sys?.sunset?.toString() ?? ''),
+            pressure: itemWeather?.main?.pressure?.toString() ?? '',
+            humidity: itemWeather?.main?.humidity?.toString() ?? '',
+            windDeg: itemWeather?.wind?.deg?.toString() ?? '',
+            windSpeed: itemWeather?.wind?.speed?.toString() ?? '',
+            windGust: itemWeather?.wind?.gust?.toString() ?? '',
           ),
         ],
-      ),
-    );
-  }
-}
-
-class FindLocation extends StatelessWidget {
-  FindLocation({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(),
-          ),
-        ),
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class WidgetColor {
   static const themeApp = Color(0xFF6A5ACD);
@@ -8,4 +7,6 @@ class WidgetColor {
   static const mainButtonAfter = Colors.blueAccent;
   static const mainText = Colors.white;
   static const secondaryText = Colors.grey;
+  static const backgroudFindLocation = Color.fromARGB(144, 131, 190, 166);
+  static const dividerColor = Colors.amber;
 }

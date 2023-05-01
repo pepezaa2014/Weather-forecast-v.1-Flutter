@@ -7,9 +7,10 @@ import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/extensions/bool_extension.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_pepe/app/routes/app_pages.dart';
+import 'package:weather_pepe/app/utils/show_alert.dart';
 
 class HomeController extends GetxController {
-  final WeatherAPI _userAPI = Get.find();
+  final WeatherAPI _weatherAPI = Get.find();
 
   late final Rxn<Weather> weather = Rxn();
 
@@ -37,13 +38,6 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  String convertUnix(String unix) {
-    int intUnix = int.parse(unix);
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(intUnix * 1000);
-    String formattedTime = DateFormat.yMMMMd().add_jms().format(dateTime);
-    return formattedTime;
-  }
-
   void goNext() async {
     final result = await Get.toNamed(Routes.FIND_LOCATION);
     final tempWeather = result as Weather?;
@@ -53,12 +47,8 @@ class HomeController extends GetxController {
     }
   }
 
-  void getcurrentlocation() {
+  void getCurrentLocation() {
     _determinePosition();
-  }
-
-  double changeTemp(double? temp) {
-    return temp = temp! - 273.15;
   }
 
   void _getWeatherLatLon({
@@ -67,7 +57,7 @@ class HomeController extends GetxController {
   }) async {
     try {
       isLoadingGetWeather(true);
-      final result = await _userAPI.getWeatherLatLon(
+      final result = await _weatherAPI.getWeatherLatLon(
         lat: lat,
         lon: lon,
       );
@@ -75,7 +65,10 @@ class HomeController extends GetxController {
       weather.value = result;
     } catch (error) {
       isLoadingGetWeather(false);
-      print((error as AppError).message);
+      showAlert(
+        title: 'Error',
+        message: (error as AppError).message,
+      );
     }
   }
 
@@ -85,16 +78,29 @@ class HomeController extends GetxController {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
+      showAlert(
+        title: 'Error',
+        message: 'Location services are disabled.',
+      );
       return Future.error('Location services are disabled.');
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
+        showAlert(
+          title: 'Error',
+          message: 'Location permissions are denied',
+        );
         return Future.error('Location permissions are denied');
       }
     }
     if (permission == LocationPermission.deniedForever) {
+      showAlert(
+        title: 'Error',
+        message:
+            'Location permissions are permanently denied, we cannot request permissions.',
+      );
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
