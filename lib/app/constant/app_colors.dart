@@ -11,4 +11,6 @@ class AppColors {
   static const dividerColor = Colors.amber;
   static const secondaryButton = Colors.blueAccent;
   static const boderColor = Colors.white;
+  static const textDayColor = Colors.black;
+  static const textNightColor = Colors.white;
 }

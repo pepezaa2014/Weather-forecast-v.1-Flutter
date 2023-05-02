@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:weather_pepe/app/constant/app_colors.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:weather_pepe/app/constant/converter.dart';
+import 'package:weather_pepe/app/constant/theme_view.dart';
 import 'package:weather_pepe/app/constant/weather_icon.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
@@ -18,6 +19,7 @@ class MainContainer extends StatelessWidget {
     required this.windGust,
     required this.sunrise,
     required this.sunset,
+    required this.textColor,
   });
 
   final String pressure;
@@ -27,6 +29,7 @@ class MainContainer extends StatelessWidget {
   final String windGust;
   final String sunrise;
   final String sunset;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +44,19 @@ class MainContainer extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Expanded(
                       child: HeadInformation(
                         img: ImageName.sunrise,
                         text: 'Sunrise',
+                        textColor: textColor,
                       ),
                     ),
                     Expanded(
                       child: HeadInformation(
                         img: ImageName.sunset,
                         text: 'Sunset',
+                        textColor: textColor,
                       ),
                     ),
                   ],
@@ -61,27 +66,31 @@ class MainContainer extends StatelessWidget {
                     Expanded(
                       child: DateTime(
                         text: sunrise,
+                        textColor: textColor,
                       ),
                     ),
                     Expanded(
                       child: DateTime(
                         text: sunset,
+                        textColor: textColor,
                       ),
                     ),
                   ],
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Expanded(
                       child: HeadInformation(
                         img: ImageName.barometer,
                         text: 'Pressure',
+                        textColor: textColor,
                       ),
                     ),
                     Expanded(
                       child: HeadInformation(
                         img: ImageName.humidity,
                         text: 'Humidity',
+                        textColor: textColor,
                       ),
                     )
                   ],
@@ -92,12 +101,14 @@ class MainContainer extends StatelessWidget {
                       child: DetailsInformation(
                         text: pressure,
                         unit: 'hPa',
+                        textColor: textColor,
                       ),
                     ),
                     Expanded(
                       child: DetailsInformation(
                         text: humidity,
                         unit: '%',
+                        textColor: textColor,
                       ),
                     )
                   ],
@@ -106,21 +117,24 @@ class MainContainer extends StatelessWidget {
                   thickness: 2,
                   color: Colors.white,
                 ),
-                const MainInformation(
+                MainInformation(
                   text: 'Wind',
+                  textColor: textColor,
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Expanded(
                       child: HeadInformation(
                         img: ImageName.wind,
                         text: 'Wind Speed',
+                        textColor: textColor,
                       ),
                     ),
                     Expanded(
                       child: HeadInformation(
                         img: ImageName.wind,
                         text: 'Wind Degree',
+                        textColor: textColor,
                       ),
                     )
                   ],
@@ -134,23 +148,27 @@ class MainContainer extends StatelessWidget {
                       child: DetailsInformation(
                         text: windSpeed,
                         unit: 'm/s',
+                        textColor: textColor,
                       ),
                     ),
                     Expanded(
                       child: DetailsInformation(
                         text: windDeg,
                         unit: 'degree',
+                        textColor: textColor,
                       ),
                     )
                   ],
                 ),
-                const HeadInformation(
+                HeadInformation(
                   img: ImageName.wind,
                   text: 'Wind Gust',
+                  textColor: textColor,
                 ),
                 DetailsInformation(
                   text: windDeg,
                   unit: 'm/s',
+                  textColor: textColor,
                 ),
               ],
             ),
@@ -161,39 +179,45 @@ class MainContainer extends StatelessWidget {
   }
 }
 
-class OnTheTopDay extends StatelessWidget {
-  const OnTheTopDay({
+class OnTheTop extends StatelessWidget {
+  const OnTheTop({
     super.key,
     required this.itemWeather,
+    required this.textColor,
   });
 
   final Weather? itemWeather;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
-          TitleTextDay(
+          TitleText(
             text: itemWeather?.name?.toString() ?? '',
+            textColor: textColor,
           ),
-          CountryDay(
+          Country(
             text: itemWeather?.sys?.country?.toString() ?? '',
+            textColor: textColor,
           ),
-          TempTextDay(
+          TempText(
             text: Converter.changeTemp(itemWeather?.main?.temp)
                     ?.toStringAsFixed(2) ??
                 '',
+            textColor: textColor,
           ),
-          HighLowTempTextDay(
+          HighLowTempText(
             high: Converter.changeTemp(itemWeather?.main?.tempMax)
                     ?.toStringAsFixed(2) ??
                 '',
             low: Converter.changeTemp(itemWeather?.main?.tempMin)
                     ?.toStringAsFixed(2) ??
                 '',
+            textColor: textColor,
           ),
-          StatusTextDay(
+          StatusText(
             img: itemWeather?.weather
                     ?.firstWhereOrNull((element) => true)
                     ?.weatherIcon
@@ -205,10 +229,12 @@ class OnTheTopDay extends StatelessWidget {
                     ?.description
                     ?.toString() ??
                 '',
+            textColor: textColor,
           ),
-          LatLonTextDay(
+          LatLonText(
             lat: itemWeather?.coord?.lat?.toString() ?? '',
             lon: itemWeather?.coord?.lon?.toString() ?? '',
+            textColor: textColor,
           ),
           MainContainer(
             sunrise: Converter.convertUnix(
@@ -220,72 +246,7 @@ class OnTheTopDay extends StatelessWidget {
             windDeg: itemWeather?.wind?.deg?.toString() ?? '',
             windSpeed: itemWeather?.wind?.speed?.toString() ?? '',
             windGust: itemWeather?.wind?.gust?.toString() ?? '',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class OnTheTopNight extends StatelessWidget {
-  const OnTheTopNight({
-    super.key,
-    required this.itemWeather,
-  });
-
-  final Weather? itemWeather;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          TitleTextNight(
-            text: itemWeather?.name?.toString() ?? '',
-          ),
-          CountryNight(
-            text: itemWeather?.sys?.country?.toString() ?? '',
-          ),
-          TempTextNight(
-            text: Converter.changeTemp(itemWeather?.main?.temp)
-                    ?.toStringAsFixed(2) ??
-                '',
-          ),
-          HighLowTempTextNight(
-            high: Converter.changeTemp(itemWeather?.main?.tempMax)
-                    ?.toStringAsFixed(2) ??
-                '',
-            low: Converter.changeTemp(itemWeather?.main?.tempMin)
-                    ?.toStringAsFixed(2) ??
-                '',
-          ),
-          StatusTextNight(
-            img: itemWeather?.weather
-                    ?.firstWhereOrNull((element) => true)
-                    ?.weatherIcon
-                    ?.imageName
-                    .toString() ??
-                '',
-            text: itemWeather?.weather
-                    ?.firstWhereOrNull((element) => true)
-                    ?.description
-                    ?.toString() ??
-                '',
-          ),
-          LatLonTextNight(
-            lat: itemWeather?.coord?.lat?.toString() ?? '',
-            lon: itemWeather?.coord?.lon?.toString() ?? '',
-          ),
-          MainContainer(
-            sunrise: Converter.convertUnix(
-                itemWeather?.sys?.sunrise?.toString() ?? ''),
-            sunset: Converter.convertUnix(
-                itemWeather?.sys?.sunset?.toString() ?? ''),
-            pressure: itemWeather?.main?.pressure?.toString() ?? '',
-            humidity: itemWeather?.main?.humidity?.toString() ?? '',
-            windDeg: itemWeather?.wind?.deg?.toString() ?? '',
-            windSpeed: itemWeather?.wind?.speed?.toString() ?? '',
-            windGust: itemWeather?.wind?.gust?.toString() ?? '',
+            textColor: textColor,
           ),
         ],
       ),

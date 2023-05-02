@@ -47,13 +47,15 @@ class AppbarText extends StatelessWidget {
   }
 }
 
-class TitleTextDay extends StatelessWidget {
-  const TitleTextDay({
+class TitleText extends StatelessWidget {
+  const TitleText({
     super.key,
     required this.text,
+    required this.textColor,
   });
 
   final String text;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -63,36 +65,10 @@ class TitleTextDay extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-      ),
-    );
-  }
-}
-
-class TitleTextNight extends StatelessWidget {
-  const TitleTextNight({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: textColor,
         ),
       ),
     );
@@ -103,9 +79,11 @@ class MainInformation extends StatelessWidget {
   const MainInformation({
     super.key,
     required this.text,
+    required this.textColor,
   });
 
   final String text;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +91,10 @@ class MainInformation extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: AppColors.mainText,
+          color: textColor,
         ),
       ),
     );
@@ -128,10 +106,12 @@ class HeadInformation extends StatelessWidget {
     super.key,
     required this.text,
     required this.img,
+    required this.textColor,
   });
 
   final String text;
   final String img;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -147,15 +127,15 @@ class HeadInformation extends StatelessWidget {
                 img,
                 width: 20,
                 height: 20,
-                color: Colors.white,
+                color: textColor,
               ),
             ),
             Text(
               text,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: AppColors.mainText,
+                color: textColor,
               ),
             ),
           ],
@@ -170,10 +150,12 @@ class DetailsInformation extends StatelessWidget {
     super.key,
     required this.text,
     required this.unit,
+    required this.textColor,
   });
 
   final String text;
   final String unit;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -182,9 +164,9 @@ class DetailsInformation extends StatelessWidget {
       child: Text(
         textAlign: TextAlign.center,
         text + ' ' + unit,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
-          color: AppColors.mainText,
+          color: textColor,
         ),
       ),
     );
@@ -195,9 +177,11 @@ class DateTime extends StatelessWidget {
   const DateTime({
     super.key,
     required this.text,
+    required this.textColor,
   });
 
   final String text;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -206,22 +190,24 @@ class DateTime extends StatelessWidget {
       child: Text(
         textAlign: TextAlign.center,
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
-          color: AppColors.mainText,
+          color: textColor,
         ),
       ),
     );
   }
 }
 
-class CountryDay extends StatelessWidget {
-  const CountryDay({
+class Country extends StatelessWidget {
+  const Country({
     super.key,
     required this.text,
+    required this.textColor,
   });
 
   final String text;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -231,49 +217,25 @@ class CountryDay extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
+          color: textColor,
         ),
       ),
     );
   }
 }
 
-class CountryNight extends StatelessWidget {
-  const CountryNight({
+class TempText extends StatelessWidget {
+  const TempText({
     super.key,
     required this.text,
+    required this.textColor,
   });
 
   final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 8,
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: AppColors.mainText,
-        ),
-      ),
-    );
-  }
-}
-
-class TempTextDay extends StatelessWidget {
-  const TempTextDay({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -283,51 +245,27 @@ class TempTextDay extends StatelessWidget {
       ),
       child: Text(
         text + '°',
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
+          color: textColor,
         ),
       ),
     );
   }
 }
 
-class TempTextNight extends StatelessWidget {
-  const TempTextNight({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-      ),
-      child: Text(
-        text + '°',
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: AppColors.mainText,
-        ),
-      ),
-    );
-  }
-}
-
-class HighLowTempTextDay extends StatelessWidget {
-  const HighLowTempTextDay({
+class HighLowTempText extends StatelessWidget {
+  const HighLowTempText({
     super.key,
     required this.high,
     required this.low,
+    required this.textColor,
   });
 
   final String high;
   final String low;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -335,51 +273,27 @@ class HighLowTempTextDay extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Text(
         'H:' + high + '°  L:' + low + '°',
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
+          color: textColor,
         ),
       ),
     );
   }
 }
 
-class HighLowTempTextNight extends StatelessWidget {
-  const HighLowTempTextNight({
-    super.key,
-    required this.high,
-    required this.low,
-  });
-
-  final String high;
-  final String low;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        'H:' + high + '°  L:' + low + '°',
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: AppColors.mainText,
-        ),
-      ),
-    );
-  }
-}
-
-class StatusTextDay extends StatelessWidget {
-  const StatusTextDay({
+class StatusText extends StatelessWidget {
+  const StatusText({
     super.key,
     required this.text,
     required this.img,
+    required this.textColor,
   });
 
   final String text;
   final String img;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -399,10 +313,10 @@ class StatusTextDay extends StatelessWidget {
             ),
             Text(
               text,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: AppColors.mainText,
+                color: textColor,
               ),
             ),
           ],
@@ -412,56 +326,17 @@ class StatusTextDay extends StatelessWidget {
   }
 }
 
-class StatusTextNight extends StatelessWidget {
-  const StatusTextNight({
-    super.key,
-    required this.text,
-    required this.img,
-  });
-
-  final String text;
-  final String img;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Image.asset(
-                img,
-                width: 40,
-                height: 40,
-              ),
-            ),
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: AppColors.mainText,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LatLonTextDay extends StatelessWidget {
-  const LatLonTextDay({
+class LatLonText extends StatelessWidget {
+  const LatLonText({
     super.key,
     required this.lat,
     required this.lon,
+    required this.textColor,
   });
 
   final String lat;
   final String lon;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -469,36 +344,10 @@ class LatLonTextDay extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Text(
         'Lat:' + lat + '  Lon:' + lon,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-      ),
-    );
-  }
-}
-
-class LatLonTextNight extends StatelessWidget {
-  const LatLonTextNight({
-    super.key,
-    required this.lat,
-    required this.lon,
-  });
-
-  final String lat;
-  final String lon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        'Lat:' + lat + '  Lon:' + lon,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: AppColors.mainText,
+          color: textColor,
         ),
       ),
     );

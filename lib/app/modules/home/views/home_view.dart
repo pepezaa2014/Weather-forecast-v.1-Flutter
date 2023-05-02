@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/app_colors.dart';
+import 'package:weather_pepe/app/constant/theme_view.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
 
 import 'package:weather_pepe/app/widgets/container.dart';
@@ -54,8 +54,8 @@ class HomeView extends GetView<HomeController> {
             image: DecorationImage(
               image: AssetImage(
                 themeApp != null && themeApp.icon.toString().contains('d')
-                    ? ImageName.day
-                    : ImageName.night,
+                    ? Time.day.backgroundImage
+                    : Time.night.backgroundImage,
               ),
               fit: BoxFit.cover,
             ),
@@ -65,11 +65,13 @@ class HomeView extends GetView<HomeController> {
               children: [
                 themeApp != null
                     ? themeApp.icon.toString().contains('d')
-                        ? OnTheTopDay(
+                        ? OnTheTop(
                             itemWeather: weathers,
+                            textColor: Time.day.textColor,
                           )
-                        : OnTheTopNight(
+                        : OnTheTop(
                             itemWeather: weathers,
+                            textColor: Time.night.textColor,
                           )
                     : const SizedBox.shrink(),
               ],
