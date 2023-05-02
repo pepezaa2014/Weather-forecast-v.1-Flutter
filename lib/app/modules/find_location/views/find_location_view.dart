@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/app_color.dart';
+import 'package:weather_pepe/app/constant/app_colors.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
 import 'package:weather_pepe/app/widgets/button.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
@@ -10,27 +10,30 @@ import '../controllers/find_location_controller.dart';
 
 class FindLocationView extends GetView<FindLocationController> {
   const FindLocationView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          appBar: AppBar(
-            title: const Text('Search Location'),
-            centerTitle: true,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: AppBar(
+              title: const Text('Search Location'),
+              centerTitle: true,
+            ),
+            body: _body(),
           ),
-          body: _body(),
-        ),
-        Obx(
-          () => loadingIndicator(controller.isLoading.value),
-        ),
-      ],
+          Obx(
+            () => loadingIndicator(controller.isLoading.value),
+          ),
+        ],
+      ),
     );
   }
 
   _body() {
     return GestureDetector(
-      onTap: () => controller.unFocusMain,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -39,9 +42,6 @@ class FindLocationView extends GetView<FindLocationController> {
         alignment: Alignment.center,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: () {
-            controller.unFocusMain();
-          },
           child: Padding(
             padding: const EdgeInsets.all(32),
             child: Column(
@@ -52,8 +52,7 @@ class FindLocationView extends GetView<FindLocationController> {
                 SizedBox(
                   height: 44,
                   child: TextField(
-                    focusNode: controller.focusNodeCity,
-                    controller: controller.searchTextControllerCity,
+                    controller: controller.searchTextCityController,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.search),
                       hintText: 'City',
@@ -61,7 +60,8 @@ class FindLocationView extends GetView<FindLocationController> {
                           horizontal: 16, vertical: 12),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide:
+                            const BorderSide(color: AppColors.boderColor),
                       ),
                     ),
                   ),
@@ -82,10 +82,9 @@ class FindLocationView extends GetView<FindLocationController> {
                       child: SizedBox(
                         height: 44,
                         child: TextField(
-                          focusNode: controller.focusNodeLat,
                           keyboardType: const TextInputType.numberWithOptions(
                               decimal: true),
-                          controller: controller.searchTextControllerLat,
+                          controller: controller.searchTextLatController,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.search),
                             hintText: 'Latitude',
@@ -93,7 +92,8 @@ class FindLocationView extends GetView<FindLocationController> {
                                 horizontal: 16, vertical: 12),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Colors.white),
+                              borderSide:
+                                  const BorderSide(color: AppColors.boderColor),
                             ),
                           ),
                         ),
@@ -108,10 +108,9 @@ class FindLocationView extends GetView<FindLocationController> {
                         child: Align(
                           alignment: Alignment.center,
                           child: TextField(
-                            focusNode: controller.focusNodeLon,
                             keyboardType: const TextInputType.numberWithOptions(
                                 decimal: true),
-                            controller: controller.searchTextControllerLon,
+                            controller: controller.searchTextLonController,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.search),
                               hintText: 'Longitude',
@@ -119,8 +118,8 @@ class FindLocationView extends GetView<FindLocationController> {
                                   horizontal: 16, vertical: 12),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
+                                borderSide: const BorderSide(
+                                    color: AppColors.boderColor),
                               ),
                             ),
                           ),

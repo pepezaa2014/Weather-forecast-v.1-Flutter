@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/app_color.dart';
+import 'package:weather_pepe/app/constant/app_colors.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
 
 import 'package:weather_pepe/app/widgets/container.dart';

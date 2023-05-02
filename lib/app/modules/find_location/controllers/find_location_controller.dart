@@ -9,21 +9,17 @@ import 'package:weather_pepe/app/utils/show_alert.dart';
 class FindLocationController extends GetxController {
   final WeatherAPI _weatherAPI = Get.find();
 
-  final TextEditingController searchTextControllerCity =
+  final TextEditingController searchTextCityController =
       TextEditingController();
-  final TextEditingController searchTextControllerLat = TextEditingController();
-  final TextEditingController searchTextControllerLon = TextEditingController();
+  final TextEditingController searchTextLatController = TextEditingController();
+  final TextEditingController searchTextLonController = TextEditingController();
 
-  final RxString searchTextCity = ''.obs;
-  final RxString searchTextLat = ''.obs;
-  final RxString searchTextLon = ''.obs;
+  final RxString searchCityText = ''.obs;
+  final RxString searchLatText = ''.obs;
+  final RxString searchLonText = ''.obs;
 
   final isLoadingGetWeatherLatLon = false.obs;
   final isLoadingGetWeatherCity = false.obs;
-
-  FocusNode focusNodeCity = FocusNode();
-  FocusNode focusNodeLat = FocusNode();
-  FocusNode focusNodeLon = FocusNode();
 
   RxBool get isLoading {
     return [
@@ -35,14 +31,14 @@ class FindLocationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    searchTextControllerCity.addListener(() {
-      searchTextCity.value = searchTextControllerCity.text;
+    searchTextCityController.addListener(() {
+      searchCityText.value = searchTextCityController.text;
     });
-    searchTextControllerLat.addListener(() {
-      searchTextLat.value = searchTextControllerLat.text;
+    searchTextLatController.addListener(() {
+      searchLatText.value = searchTextLatController.text;
     });
-    searchTextControllerLon.addListener(() {
-      searchTextLon.value = searchTextControllerLon.text;
+    searchTextLonController.addListener(() {
+      searchLonText.value = searchTextLonController.text;
     });
   }
 
@@ -57,40 +53,22 @@ class FindLocationController extends GetxController {
   }
 
   void getCity() {
-    if (searchTextCity.isNotEmpty) {
-      _getWeatherCity(searchTextCity.value);
+    if (searchCityText.isNotEmpty) {
+      _getWeatherCity(searchCityText.value);
     } else {
       showAlert(title: 'Error', message: 'Please fill the text field.');
     }
   }
 
   void getLatLon() {
-    if (searchTextLat.isNotEmpty && searchTextLon.isNotEmpty) {
+    if (searchLatText.isNotEmpty && searchLonText.isNotEmpty) {
       _getWeatherLatLon(
-        lat: double.tryParse(searchTextLat.toString()),
-        lon: double.tryParse(searchTextLon.toString()),
+        lat: double.tryParse(searchLatText.toString()),
+        lon: double.tryParse(searchLonText.toString()),
       );
     } else {
       showAlert(title: 'Error', message: 'Please fill the text field.');
     }
-  }
-
-  void unFocusCity() {
-    focusNodeCity.unfocus();
-  }
-
-  void unFocusLat() {
-    focusNodeLat.unfocus();
-  }
-
-  void unFocusLon() {
-    focusNodeLon.unfocus();
-  }
-
-  void unFocusMain() {
-    focusNodeLon.unfocus();
-    focusNodeLat.unfocus();
-    focusNodeCity.unfocus();
   }
 
   void _getWeatherCity(
@@ -98,7 +76,6 @@ class FindLocationController extends GetxController {
   ) async {
     try {
       isLoadingGetWeatherCity(true);
-      unFocusCity();
       final result = await _weatherAPI.getWeatherCity(
         city: city,
       );
@@ -119,7 +96,6 @@ class FindLocationController extends GetxController {
   }) async {
     try {
       isLoadingGetWeatherLatLon(true);
-      unFocusCity();
       if (lat != null && lon != null) {
         final result = await _weatherAPI.getWeatherLatLon(
           lat: lat,

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_pepe/app/constant/app_color.dart';
+import 'package:weather_pepe/app/constant/app_colors.dart';
 
 class SearchText extends StatelessWidget {
   const SearchText({

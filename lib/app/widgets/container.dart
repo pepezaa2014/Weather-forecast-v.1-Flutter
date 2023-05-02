@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/app_color.dart';
+import 'package:weather_pepe/app/constant/app_colors.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:weather_pepe/app/constant/converter.dart';
 import 'package:weather_pepe/app/constant/weather_icon.dart';
