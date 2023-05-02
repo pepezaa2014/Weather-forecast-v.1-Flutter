@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/used_widget_color.dart';
+import 'package:weather_pepe/app/constant/app_color.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
 import 'package:weather_pepe/app/widgets/button.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
@@ -22,7 +22,7 @@ class FindLocationView extends GetView<FindLocationController> {
           body: _body(),
         ),
         Obx(
-          () => loadingIndicator(controller.isLoadingLatLon.value),
+          () => loadingIndicator(controller.isLoading.value),
         ),
       ],
     );
@@ -34,7 +34,7 @@ class FindLocationView extends GetView<FindLocationController> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: UseWidgetColor.backgroudFindLocation,
+          color: AppColors.backgroudFindLocation,
         ),
         alignment: Alignment.center,
         child: GestureDetector(
@@ -70,7 +70,7 @@ class FindLocationView extends GetView<FindLocationController> {
                   onPressed: controller.getCity,
                 ),
                 const Divider(
-                  color: UseWidgetColor.dividerColor,
+                  color: AppColors.dividerColor,
                   thickness: 2,
                 ),
                 const SearchText(

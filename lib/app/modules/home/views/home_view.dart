@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/used_widget_color.dart';
+import 'package:weather_pepe/app/constant/app_color.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
 
 import 'package:weather_pepe/app/widgets/container.dart';
@@ -28,7 +28,6 @@ class HomeView extends GetView<HomeController> {
 
   _appbar() {
     return AppBar(
-      backgroundColor: UseWidgetColor.appBar,
       centerTitle: true,
       leading: IconButton(
         onPressed: controller.getCurrentLocation,

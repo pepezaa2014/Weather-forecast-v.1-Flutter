@@ -25,18 +25,6 @@ class FindLocationController extends GetxController {
   FocusNode focusNodeLat = FocusNode();
   FocusNode focusNodeLon = FocusNode();
 
-  RxBool get isLoadingLatLon {
-    return [
-      isLoadingGetWeatherLatLon.value,
-    ].atLeastOneTrue.obs;
-  }
-
-  RxBool get isLoadingCity {
-    return [
-      isLoadingGetWeatherCity.value,
-    ].atLeastOneTrue.obs;
-  }
-
   RxBool get isLoading {
     return [
       isLoadingGetWeatherCity.value,

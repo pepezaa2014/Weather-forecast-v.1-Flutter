@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:material_color_generator/material_color_generator.dart';
 import 'package:weather_pepe/app/core/api/weather_api.dart';
 import 'package:weather_pepe/app/core/dio_client.dart';
 
@@ -12,9 +13,13 @@ void main() async {
 
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      theme: ThemeData(
+        primarySwatch: generateMaterialColor(color: Color(0xFF113861)),
+      ),
     ),
   );
 }

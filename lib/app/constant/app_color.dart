@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class UseWidgetColor {
+class AppColors {
   static const themeApp = Color(0xFF6A5ACD);
-  static const appBar = Color(0xFF483D8B);
   static const mainButton = Colors.grey;
   static const mainButtonAfter = Colors.blueAccent;
   static const mainText = Colors.white;

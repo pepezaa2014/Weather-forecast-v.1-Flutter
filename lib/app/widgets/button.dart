@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:weather_pepe/app/constant/used_widget_color.dart';
+import 'package:weather_pepe/app/constant/app_color.dart';
 
 class SecondaryButton extends StatelessWidget {
   const SecondaryButton({
@@ -22,7 +22,7 @@ class SecondaryButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: UseWidgetColor.secondaryButton,
+            backgroundColor: AppColors.secondaryButton,
             minimumSize: const Size.fromHeight(80),
           ),
           child: const Text(
