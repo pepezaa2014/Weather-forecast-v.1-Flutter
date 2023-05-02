@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:weather_pepe/app/constant/app_colors.dart';
@@ -85,6 +86,10 @@ class FindLocationView extends GetView<FindLocationController> {
                           keyboardType: const TextInputType.numberWithOptions(
                               decimal: true),
                           controller: controller.searchTextLatController,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d{0,99}')),
+                          ],
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.search),
                             hintText: 'Latitude',
@@ -110,6 +115,10 @@ class FindLocationView extends GetView<FindLocationController> {
                           child: TextField(
                             keyboardType: const TextInputType.numberWithOptions(
                                 decimal: true),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d{0,99}')),
+                            ],
                             controller: controller.searchTextLonController,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.search),
