@@ -60,7 +60,7 @@ class HomeView extends GetView<HomeController> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Center(
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 themeApp != null
@@ -70,6 +70,17 @@ class HomeView extends GetView<HomeController> {
                             textColor: Time.day.textColor,
                           )
                         : OnTheTop(
+                            itemWeather: weathers,
+                            textColor: Time.night.textColor,
+                          )
+                    : const SizedBox.shrink(),
+                themeApp != null
+                    ? themeApp.icon.toString().contains('d')
+                        ? MainContainer(
+                            itemWeather: weathers,
+                            textColor: Time.day.textColor,
+                          )
+                        : MainContainer(
                             itemWeather: weathers,
                             textColor: Time.night.textColor,
                           )

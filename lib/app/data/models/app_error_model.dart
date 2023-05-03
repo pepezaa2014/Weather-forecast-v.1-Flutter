@@ -1,16 +1,17 @@
 class AppError implements Exception {
-  int? code;
-  String? title;
+  String? code;
   String? message;
+  int? statusCode;
 
   AppError({
     this.code,
-    this.title,
     this.message,
+    this.statusCode,
   });
 
   AppError.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
     message = json['message'];
+    code = json['cod'];
+    statusCode = json['statusCode'];
   }
 }

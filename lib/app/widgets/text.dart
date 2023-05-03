@@ -303,13 +303,10 @@ class StatusText extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Image.asset(
-                img,
-                width: 20,
-                height: 20,
-              ),
+            Image.asset(
+              img,
+              width: 60,
+              height: 60,
             ),
             Text(
               text,

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/extensions/bool_extension.dart';
 
 import 'package:weather_pepe/app/core/api/weather_api.dart';
@@ -20,6 +21,8 @@ class FindLocationController extends GetxController {
 
   final isLoadingGetWeatherLatLon = false.obs;
   final isLoadingGetWeatherCity = false.obs;
+
+  late final Rxn<Weather> weather = Rxn();
 
   RxBool get isLoading {
     return [
@@ -56,7 +59,10 @@ class FindLocationController extends GetxController {
     if (searchCityText.isNotEmpty) {
       _getWeatherCity(searchCityText.value);
     } else {
-      showAlert(title: 'Error', message: 'Please fill the text field.');
+      showAlert(
+        title: 'Error',
+        message: 'Please fill the text field.',
+      );
     }
   }
 
@@ -67,7 +73,10 @@ class FindLocationController extends GetxController {
         lon: double.tryParse(searchLonText.toString()),
       );
     } else {
-      showAlert(title: 'Error', message: 'Please fill the text field.');
+      showAlert(
+        title: 'Error',
+        message: 'Please fill the text field.',
+      );
     }
   }
 
@@ -83,9 +92,8 @@ class FindLocationController extends GetxController {
       Get.back(result: result);
     } catch (error) {
       isLoadingGetWeatherCity(false);
-      showAlert(
-        title: 'Error',
-        message: (error as AppError).message,
+      showAlertError(
+        error: error,
       );
     }
   }
@@ -96,6 +104,7 @@ class FindLocationController extends GetxController {
   }) async {
     try {
       isLoadingGetWeatherLatLon(true);
+
       if (lat != null && lon != null) {
         final result = await _weatherAPI.getWeatherLatLon(
           lat: lat,
@@ -106,9 +115,8 @@ class FindLocationController extends GetxController {
       }
     } catch (error) {
       isLoadingGetWeatherLatLon(false);
-      showAlert(
-        title: 'Error',
-        message: (error as AppError).message,
+      showAlertError(
+        error: error,
       );
     }
   }

@@ -9,12 +9,15 @@ class Weather {
   int? visibility;
   Wind? wind;
   Clouds? clouds;
+  Snow? snow;
+  Rain? rain;
   int? dt;
   Sys? sys;
   int? timezone;
   int? id;
   String? name;
   int? cod;
+  String? message;
 
   Weather({
     this.coord,
@@ -34,11 +37,17 @@ class Weather {
     main = json['main'] != null ? Main?.fromJson(json['main']) : null;
 
     wind = json['wind'] != null ? Wind?.fromJson(json['wind']) : null;
+    snow = json['snow'] != null ? Snow?.fromJson(json['snow']) : null;
+    rain = json['rain'] != null ? Rain?.fromJson(json['rain']) : null;
+
     clouds = json['clouds'] != null ? Clouds?.fromJson(json['clouds']) : null;
 
     sys = json['sys'] != null ? Sys?.fromJson(json['sys']) : null;
 
     name = json['name'];
+
+    cod = json['cod'];
+    message = json['message'];
   }
 }
 
@@ -135,6 +144,30 @@ class Sys {
     country = json['country'];
     sunrise = json['sunrise'];
     sunset = json['sunset'];
+  }
+}
+
+class Snow {
+  double? d1h;
+  double? d3h;
+
+  Snow({this.d1h, this.d3h});
+
+  Snow.fromJson(Map<String, dynamic> json) {
+    d1h = (json['1h'] as num?)?.toDouble();
+    d3h = (json['3h'] as num?)?.toDouble();
+  }
+}
+
+class Rain {
+  double? d1h;
+  double? d3h;
+
+  Rain({this.d1h, this.d3h});
+
+  Rain.fromJson(Map<String, dynamic> json) {
+    d1h = (json['1h'] as num?)?.toDouble();
+    d3h = (json['3h'] as num?)?.toDouble();
   }
 }
 

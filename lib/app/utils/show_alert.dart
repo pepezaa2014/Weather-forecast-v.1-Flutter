@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:weather_pepe/app/data/models/app_error_model.dart';
 
 class AlertAction {
   String title;
@@ -35,6 +36,29 @@ void showAlert({
         onAction: onAction,
       ),
     ],
+  );
+}
+
+void showAlertError({
+  required Object? error,
+  VoidCallback? onAction,
+}) {
+  final title;
+
+  if ((error is AppError)) {
+    if (error.code != null) {
+      title = error.code.toString();
+    } else {
+      title = error.statusCode.toString();
+    }
+  } else {
+    title = 'Error';
+  }
+
+  showAlert(
+    title: title,
+    message: (error is AppError) ? error.message : error.toString(),
+    onAction: onAction,
   );
 }
 

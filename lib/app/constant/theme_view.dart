@@ -26,5 +26,3 @@ extension TimeExtension on Time {
     }
   }
 }
-
-class ThemeView {}

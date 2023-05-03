@@ -3,9 +3,6 @@ import 'package:weather_pepe/app/core/dio_client.dart';
 import 'package:weather_pepe/app/core/handle_exceptions.dart';
 import 'package:weather_pepe/app/core/routers/weather_router.dart';
 
-import 'package:flutter/widgets.dart';
-import 'package:weather_pepe/app/core/dio_client.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 
 class WeatherAPI {
