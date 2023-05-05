@@ -54,8 +54,8 @@ class HomeView extends GetView<HomeController> {
             image: DecorationImage(
               image: AssetImage(
                 themeApp != null && themeApp.icon.toString().contains('d')
-                    ? Time.day.backgroundImage
-                    : Time.night.backgroundImage,
+                    ? ThemeView.day.backgroundImage
+                    : ThemeView.night.backgroundImage,
               ),
               fit: BoxFit.cover,
             ),
@@ -67,22 +67,22 @@ class HomeView extends GetView<HomeController> {
                     ? themeApp.icon.toString().contains('d')
                         ? OnTheTop(
                             itemWeather: weathers,
-                            textColor: Time.day.textColor,
+                            textColor: ThemeView.day.textColor,
                           )
                         : OnTheTop(
                             itemWeather: weathers,
-                            textColor: Time.night.textColor,
+                            textColor: ThemeView.night.textColor,
                           )
                     : const SizedBox.shrink(),
                 themeApp != null
                     ? themeApp.icon.toString().contains('d')
                         ? MainContainer(
                             itemWeather: weathers,
-                            textColor: Time.day.textColor,
+                            textColor: ThemeView.day.textColor,
                           )
                         : MainContainer(
                             itemWeather: weathers,
-                            textColor: Time.night.textColor,
+                            textColor: ThemeView.night.textColor,
                           )
                     : const SizedBox.shrink(),
               ],
