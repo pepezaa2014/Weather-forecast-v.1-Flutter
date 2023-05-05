@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:weather_pepe/app/constant/app_colors.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
 import 'package:weather_pepe/app/widgets/button.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
-
 import '../controllers/find_location_controller.dart';
 
 class FindLocationView extends GetView<FindLocationController> {
@@ -26,7 +24,7 @@ class FindLocationView extends GetView<FindLocationController> {
             body: _body(),
           ),
           Obx(
-            () => loadingIndicator(controller.isLoading.value),
+            () => loadingWidgetIndicator(controller.isLoading.value),
           ),
         ],
       ),
@@ -63,7 +61,7 @@ class FindLocationView extends GetView<FindLocationController> {
                 ),
               ),
             ),
-            SecondaryButton(
+            PrimaryButton(
               onPressed: controller.getCity,
             ),
             const Divider(
@@ -133,7 +131,7 @@ class FindLocationView extends GetView<FindLocationController> {
                 )
               ],
             ),
-            SecondaryButton(
+            PrimaryButton(
               onPressed: controller.getLatLon,
             ),
           ],

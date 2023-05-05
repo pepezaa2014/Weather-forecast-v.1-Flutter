@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-loadingIndicator(bool isLoading) {
+loadingWidgetIndicator(bool isLoading) {
   return Visibility(
     visible: isLoading,
     child: Positioned.fill(

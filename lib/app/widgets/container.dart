@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:weather_pepe/app/constant/converter.dart';
-import 'package:weather_pepe/app/constant/weather_icon.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
 import 'package:weather_pepe/resources/resources.dart';
@@ -195,69 +193,6 @@ class MainContainer extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class OnTheTop extends StatelessWidget {
-  const OnTheTop({
-    super.key,
-    required this.itemWeather,
-    required this.textColor,
-  });
-
-  final Weather? itemWeather;
-  final Color textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          TitleText(
-            text: itemWeather?.name?.toString() ?? '',
-            textColor: textColor,
-          ),
-          Country(
-            text: itemWeather?.sys?.country?.toString() ?? '',
-            textColor: textColor,
-          ),
-          TempText(
-            text: Converter.changeTemp(itemWeather?.main?.temp)
-                    ?.toStringAsFixed(2) ??
-                '',
-            textColor: textColor,
-          ),
-          HighLowTempText(
-            high: Converter.changeTemp(itemWeather?.main?.tempMax)
-                    ?.toStringAsFixed(2) ??
-                '',
-            low: Converter.changeTemp(itemWeather?.main?.tempMin)
-                    ?.toStringAsFixed(2) ??
-                '',
-            textColor: textColor,
-          ),
-          StatusText(
-            img: itemWeather?.weather
-                    ?.firstWhereOrNull((element) => true)
-                    ?.weatherIcon
-                    ?.imageName
-                    .toString() ??
-                '',
-            text: itemWeather?.weather
-                    ?.firstWhereOrNull((element) => true)
-                    ?.description
-                    ?.toString() ??
-                '',
-            textColor: textColor,
-          ),
-          LatLonText(
-            lat: itemWeather?.coord?.lat?.toString() ?? '',
-            lon: itemWeather?.coord?.lon?.toString() ?? '',
-            textColor: textColor,
-          ),
-        ],
       ),
     );
   }

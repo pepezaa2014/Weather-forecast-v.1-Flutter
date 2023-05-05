@@ -21,7 +21,7 @@ enum WeatherIcon {
   weather50d,
 }
 
-extension WeatherExtension on WeatherIcon {
+extension WeatherIconExtension on WeatherIcon {
   String get keyValue {
     switch (this) {
       case WeatherIcon.weather01d:

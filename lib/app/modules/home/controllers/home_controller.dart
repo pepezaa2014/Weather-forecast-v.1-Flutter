@@ -1,11 +1,9 @@
-import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:weather_pepe/app/core/api/weather_api.dart';
 import 'package:weather_pepe/app/data/models/app_error_model.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/extensions/bool_extension.dart';
-import 'package:intl/intl.dart';
 import 'package:weather_pepe/app/routes/app_pages.dart';
 import 'package:weather_pepe/app/utils/show_alert.dart';
 
@@ -43,7 +41,6 @@ class HomeController extends GetxController {
     final tempWeather = result as Weather?;
     if (tempWeather != null) {
       weather.value = tempWeather;
-      print(weather.value);
     }
   }
 

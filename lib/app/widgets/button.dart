@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:weather_pepe/app/constant/app_colors.dart';
 
-class SecondaryButton extends StatelessWidget {
-  const SecondaryButton({
+class PrimaryButton extends StatelessWidget {
+  const PrimaryButton({
+    super.key,
     required this.onPressed,
   });
 

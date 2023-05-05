@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_pepe/app/constant/app_colors.dart';
 
@@ -42,34 +41,6 @@ class AppbarText extends StatelessWidget {
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: AppColors.mainText,
-      ),
-    );
-  }
-}
-
-class TitleText extends StatelessWidget {
-  const TitleText({
-    super.key,
-    required this.text,
-    required this.textColor,
-  });
-
-  final String text;
-  final Color textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: textColor,
-        ),
       ),
     );
   }
@@ -217,130 +188,6 @@ class Country extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: textColor,
-        ),
-      ),
-    );
-  }
-}
-
-class TempText extends StatelessWidget {
-  const TempText({
-    super.key,
-    required this.text,
-    required this.textColor,
-  });
-
-  final String text;
-  final Color textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-      ),
-      child: Text(
-        text + '°',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: textColor,
-        ),
-      ),
-    );
-  }
-}
-
-class HighLowTempText extends StatelessWidget {
-  const HighLowTempText({
-    super.key,
-    required this.high,
-    required this.low,
-    required this.textColor,
-  });
-
-  final String high;
-  final String low;
-  final Color textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        'H:' + high + '°  L:' + low + '°',
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: textColor,
-        ),
-      ),
-    );
-  }
-}
-
-class StatusText extends StatelessWidget {
-  const StatusText({
-    super.key,
-    required this.text,
-    required this.img,
-    required this.textColor,
-  });
-
-  final String text;
-  final String img;
-  final Color textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              img,
-              width: 60,
-              height: 60,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: textColor,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LatLonText extends StatelessWidget {
-  const LatLonText({
-    super.key,
-    required this.lat,
-    required this.lon,
-    required this.textColor,
-  });
-
-  final String lat;
-  final String lon;
-  final Color textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        'Lat:' + lat + '  Lon:' + lon,
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,

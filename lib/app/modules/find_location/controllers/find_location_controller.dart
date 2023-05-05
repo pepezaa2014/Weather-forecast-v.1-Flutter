@@ -2,9 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:weather_pepe/app/extensions/bool_extension.dart';
-
 import 'package:weather_pepe/app/core/api/weather_api.dart';
-import 'package:weather_pepe/app/data/models/app_error_model.dart';
 import 'package:weather_pepe/app/utils/show_alert.dart';
 
 class FindLocationController extends GetxController {
