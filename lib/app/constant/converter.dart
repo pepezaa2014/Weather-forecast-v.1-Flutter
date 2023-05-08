@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 class Converter {
-  static double? changeTemp(double? temp) {
+  static double? convertTemp(double? temp) {
     if (temp != null) {
       return temp = temp - 273.15;
     }

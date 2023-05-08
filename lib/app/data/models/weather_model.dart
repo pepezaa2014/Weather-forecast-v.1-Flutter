@@ -1,5 +1,5 @@
 import 'package:get/get_utils/get_utils.dart';
-import 'package:weather_pepe/app/constant/weather_icon.dart';
+import 'package:weather_pepe/app/constant/weather_icon_extension.dart';
 
 class Weather {
   Coord? coord;

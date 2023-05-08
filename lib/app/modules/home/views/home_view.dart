@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/theme_view.dart';
+import 'package:weather_pepe/app/constant/theme_view_extension.dart';
 import 'package:weather_pepe/app/utils/loading_indicator.dart';
-import 'package:weather_pepe/app/widgets/container.dart';
-import 'package:weather_pepe/app/widgets/onthetop.dart';
+import 'package:weather_pepe/app/widgets/main_container.dart';
+import 'package:weather_pepe/app/widgets/on_the_top.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -17,7 +17,7 @@ class HomeView extends GetView<HomeController> {
           body: _body(),
         ),
         Obx(
-          () => loadingWidgetIndicator(controller.isLoading.value),
+          () => loadingIndicator(controller.isLoading.value),
         ),
       ],
     );

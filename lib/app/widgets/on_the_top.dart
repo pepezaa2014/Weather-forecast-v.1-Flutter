@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_pepe/app/constant/converter.dart';
 import 'package:weather_pepe/app/data/models/weather_model.dart';
 import 'package:get/get.dart';
-import 'package:weather_pepe/app/constant/weather_icon.dart';
+import 'package:weather_pepe/app/constant/weather_icon_extension.dart';
 
 class OnTheTop extends StatelessWidget {
   const OnTheTop({
@@ -28,16 +28,16 @@ class OnTheTop extends StatelessWidget {
             textColor: textColor,
           ),
           _tempText(
-            text: Converter.changeTemp(itemWeather?.main?.temp)
+            text: Converter.convertTemp(itemWeather?.main?.temp)
                     ?.toStringAsFixed(2) ??
                 '',
             textColor: textColor,
           ),
           _highLowTempText(
-            high: Converter.changeTemp(itemWeather?.main?.tempMax)
+            high: Converter.convertTemp(itemWeather?.main?.tempMax)
                     ?.toStringAsFixed(2) ??
                 '',
-            low: Converter.changeTemp(itemWeather?.main?.tempMin)
+            low: Converter.convertTemp(itemWeather?.main?.tempMin)
                     ?.toStringAsFixed(2) ??
                 '',
             textColor: textColor,
