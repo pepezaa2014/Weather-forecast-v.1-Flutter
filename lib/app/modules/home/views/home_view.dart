@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:weather_pepe/app/constant/theme_view_extension.dart';
-import 'package:weather_pepe/app/utils/loading_indicator.dart';
 import 'package:weather_pepe/app/widgets/main_container.dart';
 import 'package:weather_pepe/app/widgets/on_the_top.dart';
 import '../controllers/home_controller.dart';
