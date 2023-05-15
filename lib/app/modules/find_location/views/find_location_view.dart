@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:weather_pepe/app/constant/app_colors.dart';
+import 'package:weather_pepe/app/utils/loading_indicator.dart';
 import 'package:weather_pepe/app/widgets/primary_button.dart';
 import 'package:weather_pepe/app/widgets/text.dart';
 import '../controllers/find_location_controller.dart';
@@ -28,52 +29,12 @@ class FindLocationView extends GetView<FindLocationController> {
           ),
           Obx(
             () {
-              return _loadingWidget(
-                controller.isLoading.value,
+              return LoadingIndicator(
+                loading: controller.isLoading.value,
               );
             },
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _loadingWidget(
-    bool loading,
-  ) {
-    return Visibility(
-      visible: loading,
-      child: Positioned.fill(
-        child: Container(
-          color: Colors.white70,
-          child: Center(
-            child: Platform.isAndroid
-                ? Container(
-                    width: 100,
-                    height: 80,
-                    color: Colors.grey,
-                    child: Column(
-                      children: const [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 8),
-                          child: Text(
-                            'Loading...',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                        SpinKitCircle(
-                          color: Colors.amberAccent,
-                          size: 36,
-                        ),
-                      ],
-                    ),
-                  )
-                : const CupertinoActivityIndicator(radius: 16),
-          ),
-        ),
       ),
     );
   }
