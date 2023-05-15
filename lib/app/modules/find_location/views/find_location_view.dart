@@ -28,44 +28,52 @@ class FindLocationView extends GetView<FindLocationController> {
           ),
           Obx(
             () {
-              return Visibility(
-                visible: controller.isLoading.value,
-                child: Positioned.fill(
-                  child: Container(
-                    color: Colors.white70,
-                    child: Center(
-                      child: Platform.isAndroid
-                          ? Container(
-                              width: 100,
-                              height: 80,
-                              color: Colors.grey,
-                              child: Column(
-                                children: const [
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 8),
-                                    child: Text(
-                                      'Loading...',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
-                                  SpinKitCircle(
-                                    color: Colors.amberAccent,
-                                    size: 36,
-                                  ),
-                                ],
-                              ),
-                            )
-                          : const CupertinoActivityIndicator(radius: 16),
-                    ),
-                  ),
-                ),
+              return _loadingWidget(
+                controller.isLoading.value,
               );
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _loadingWidget(
+    bool loading,
+  ) {
+    return Visibility(
+      visible: loading,
+      child: Positioned.fill(
+        child: Container(
+          color: Colors.white70,
+          child: Center(
+            child: Platform.isAndroid
+                ? Container(
+                    width: 100,
+                    height: 80,
+                    color: Colors.grey,
+                    child: Column(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            'Loading...',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        SpinKitCircle(
+                          color: Colors.amberAccent,
+                          size: 36,
+                        ),
+                      ],
+                    ),
+                  )
+                : const CupertinoActivityIndicator(radius: 16),
+          ),
+        ),
       ),
     );
   }
